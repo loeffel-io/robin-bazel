@@ -1,0 +1,14 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "calc",
+    srcs = ["calc.go"],
+    importpath = "github.com/loeffel-io/robin-bazel/internal/calc",
+    visibility = ["//:__subpackages__"],
+)
+
+go_test(
+    name = "calc_test",
+    srcs = ["calc_test.go"],
+    embed = [":calc"],
+)

@@ -1,0 +1,22 @@
+load("@gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/loeffel-io/robin-bazel
+# gazelle:exclude vendor
+# gazelle:exclude .idea
+gazelle(name = "gazelle")
+
+gazelle(
+    name = "gazelle_update_deps",
+    args = [
+        "--from_file=go.mod",
+        "--to_macro=deps.bzl%go_repositories",
+        "--prune",
+    ],
+    command = "update-repos",
+)
+
+gazelle(
+    name = "gazelle_fix_diff",
+    command = "fix",
+    extra_args = ["--mode=diff"],
+)
